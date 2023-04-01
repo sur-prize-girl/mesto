@@ -1,15 +1,11 @@
-.elements__like {
+.elements__like_active {
     padding-right: 20px;
     width: 22px;
     height: 19px;
     display: block;
     cursor: pointer;
-    background-image: url(../../../images/Group.svg);
+    background-image: url(../../../../images/Union.svg);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: top left;
-}
-
-.elements__like:hover {
-    opacity: .6;
 }
