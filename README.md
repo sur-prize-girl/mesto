@@ -5,4 +5,4 @@
 Пока можно только менять информацию о пользователе. Все остальное — в планах
 Новое для меня в этой работе: использование js, создание popup
 
-* [Ссылка на проект Mesto](https://github.com/sur-prize-girl/mesto)
+* [Ссылка на проект Mesto )](https://github.com/sur-prize-girl/mesto)
