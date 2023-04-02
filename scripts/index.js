@@ -4,11 +4,13 @@ const popupCloseButton = document.querySelector('.popup__close');
 let profileName = document.querySelector('.profile__name');
 let profileStatus = document.querySelector('.profile__status');
 let formElement = document.querySelector('.popup__form');
-let nameInput = formElement.querySelector('.popup__input__name');
-let statusInput = formElement.querySelector('.popup__input__status');
+let nameInput = formElement.querySelector('.popup_type_name');
+let statusInput = formElement.querySelector('.popup_type_status');
 
 function editPopupOpen() {
     popupUserProfile.classList.add('popup_opened');
+    nameInput.value = profileName.textContent;
+    statusInput.value = profileStatus.textContent;
 }
 
 function editPopupClose() {

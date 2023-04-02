@@ -10,3 +10,7 @@
     outline: none;
     margin-bottom: 30px;
 }
+
+input:-internal-autofill-selected {
+    background-color: #fff;
+}
