@@ -4,8 +4,8 @@ const popupCloseButton = document.querySelector('.popup__close');
 let profileName = document.querySelector('.profile__name');
 let profileStatus = document.querySelector('.profile__status');
 let formElement = document.querySelector('.popup__form');
-let nameInput = formElement.querySelector('.popup_type_name');
-let statusInput = formElement.querySelector('.popup_type_status');
+let nameInput = formElement.querySelector('.popup__input_type_name');
+let statusInput = formElement.querySelector('.popup__input_type_status');
 
 function editPopupOpen() {
     popupUserProfile.classList.add('popup_opened');
