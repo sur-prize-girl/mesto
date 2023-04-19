@@ -1,47 +1,43 @@
-//Карточки при загрузке страницы
-const initialCards = [
-    {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-  ]; 
+//const for Cards-template
+const cardsElements = document.querySelector('.elements');
+const cardsTemplate = document.querySelector('.elements__card-template');
+
+//const for Image popup
+const popupImg = document.querySelector('.popup_type_img');
+const popupImgData = popupImg.querySelector('.popup__fig-img');
+const popupImgCaption = popupImg.querySelector('.popup__fig-caption');
+const popupImgClose = popupImg.querySelector('.popup__close');
+
+// const for Add cards popup
+const cardsCreateButton = document.querySelector('.profile__add-button');
+const popupCreateCard = document.querySelector('.popup_type_place');
+const popupCreateCloseButton = popupCreateCard.querySelector('.popup__close');
+const formNewCard = popupCreateCard.querySelector('.popup__form');
+const placeInput = formNewCard.querySelector('.popup__input_type_place');
+const sourceInput = formNewCard.querySelector('.popup__input_type_url');
+
+//const for Edit profile popup
+const profileEditButton = document.querySelector('.profile__edit');
+const popupUserProfile = document.querySelector('.popup_type_profile');
+const popupCloseButton = popupUserProfile.querySelector('.popup__close');
+const profileName = document.querySelector('.profile__name');
+const profileStatus = document.querySelector('.profile__status');
+const formElement = popupUserProfile.querySelector('.popup__form');
+const nameInput = formElement.querySelector('.popup__input_type_name');
+const statusInput = formElement.querySelector('.popup__input_type_status');
+
+
 
 //Open & close any popup
-const openPopup = (type) => {
-    type.classList.add('popup_opened');
+const openPopup = (popup) => {
+    popup.classList.add('popup_opened');
 }
 
-const closePopup = (type) => {
-    type.classList.remove('popup_opened');
+const closePopup = (popup) => {
+    popup.classList.remove('popup_opened');
 }
-
 
 //Cards-template
-
-const cardsElements = document.querySelector('.elements');
-const cardsTemplate = document.getElementById('cards-template');
-
-const popupImg = document.querySelector('.popup_type_img');
 
 const createCardElement = (cardData) => {
     const cardElement = cardsTemplate.content.querySelector('.elements__card').cloneNode(true);
@@ -51,9 +47,6 @@ const createCardElement = (cardData) => {
     const deleteButton = cardElement.querySelector('.elements__trash');
     const likeButton = cardElement.querySelector('.elements__like');
 
-    const popupImgData = popupImg.querySelector('.popup__fig-img');
-    const popupImgCaption = popupImg.querySelector('.popup__fig-caption');
-    const popupImgClose = popupImg.querySelector('.popup__close');
 
     cardImg.src = cardData.link;
     cardImg.alt = cardData.name;
@@ -75,30 +68,21 @@ const createCardElement = (cardData) => {
         popupImgData.alt = cardData.name;
         popupImgCaption.textContent = cardData.name;
     });
-
-    popupImgClose.addEventListener('click', () => {
-        closePopup(popupImg);
-    });
-
+     cardsElements.prepend(cardElement);
     return cardElement;
 };
 
-const renderCardElement = (cardElement) => {
-    cardsElements.prepend(cardElement);
-};
-
 initialCards.forEach((item) => {
-    renderCardElement(createCardElement(item));
+    createCardElement(item);
+});
+
+
+popupImgClose.addEventListener('click', () => {
+    closePopup(popupImg);
 });
 
 
 //Add cards popup
-const cardsCreateButton = document.querySelector('.profile__add-button');
-const popupCreateCard = document.querySelector('.popup_type_place');
-const popupCreateCloseButton = popupCreateCard.querySelector('.popup__close');
-const formNewCard = popupCreateCard.querySelector('.popup__form');
-const placeInput = formNewCard.querySelector('.popup__input_type_place');
-const sourceInput = formNewCard.querySelector('.popup__input_type_url');
 
 cardsCreateButton.addEventListener('click', () => {
     openPopup(popupCreateCard);
@@ -114,7 +98,8 @@ const handleCardFormSubmit = (event) => {
         name: placeInput.value,
         link: sourceInput.value
     };
-    renderCardElement(createCardElement(cardPlaceData));
+ 
+    createCardElement(cardPlaceData);
     closePopup(popupCreateCard);
 };
 
@@ -122,22 +107,11 @@ formNewCard.addEventListener('submit', handleCardFormSubmit);
 
 
 //Edit profile popup
-const profileEditButton = document.querySelector('.profile__edit');
-const popupUserProfile = document.querySelector('.popup_type_profile');
-const popupCloseButton = popupUserProfile.querySelector('.popup__close');
-const profileName = document.querySelector('.profile__name');
-const profileStatus = document.querySelector('.profile__status');
-const formElement = popupUserProfile.querySelector('.popup__form');
-const nameInput = formElement.querySelector('.popup__input_type_name');
-const statusInput = formElement.querySelector('.popup__input_type_status');
-
 
 function handleFormSubmit (evt) {
     evt.preventDefault(); 
-    let nameValue = nameInput.value;
-    let statusValue = statusInput.value;
-    profileName.textContent = nameValue;
-    profileStatus.textContent = statusValue;
+    profileName.textContent = nameInput.value;
+    profileStatus.textContent = statusInput.value;
     closePopup(popupUserProfile);
 }
 
