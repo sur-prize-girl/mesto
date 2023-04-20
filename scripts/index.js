@@ -68,12 +68,11 @@ const createCardElement = (cardData) => {
         popupImgData.alt = cardData.name;
         popupImgCaption.textContent = cardData.name;
     });
-     cardsElements.prepend(cardElement);
     return cardElement;
 };
 
 initialCards.forEach((item) => {
-    createCardElement(item);
+    cardsElements.prepend(createCardElement(item));
 });
 
 
@@ -98,8 +97,8 @@ const handleCardFormSubmit = (event) => {
         name: placeInput.value,
         link: sourceInput.value
     };
- 
-    createCardElement(cardPlaceData);
+
+    cardsElements.prepend(createCardElement(cardPlaceData));
     closePopup(popupCreateCard);
 };
 
