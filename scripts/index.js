@@ -26,11 +26,25 @@ const formElement = popupUserProfile.querySelector('.popup__form');
 const nameInput = formElement.querySelector('.popup__input_type_name');
 const statusInput = formElement.querySelector('.popup__input_type_status');
 
+const closePopupByEsc = (event) => {
+    const popupOpened = document.querySelector('.popup_opened');
+    if (event.key === 'Escape'){
+        closePopup(popupOpened);
+    }
+};
 
+const closePopupOnOverlay = (event) => {
+    const popupOpened = document.querySelector('.popup_opened');
+    if (event.target === event.currentTarget) {
+        closePopup(popupOpened);
+    }
+};
 
 //Open & close any popup
 const openPopup = (popup) => {
     popup.classList.add('popup_opened');
+    document.addEventListener('keydown', closePopupByEsc);
+    popup.addEventListener('click', closePopupOnOverlay);
 }
 
 const closePopup = (popup) => {
@@ -82,6 +96,8 @@ popupImgClose.addEventListener('click', () => {
 
 
 //Add cards popup
+
+
 
 cardsCreateButton.addEventListener('click', () => {
     openPopup(popupCreateCard);

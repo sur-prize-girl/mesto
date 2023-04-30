@@ -43,13 +43,11 @@ function setButtonValidity({submitButtonSelector, ...rest}, form) {
 }
 
 function enableValidation({formSelector, inputSelector, ...rest}){
+    console.log(rest);
 
-    const forms = document.querySelectorAll(formSelector);
-    const formsArray = Array.from(forms);
 
-    formsArray.forEach(function(form){ 
-
-        form.addEventListener('submit', function (event){
+    const form=document.querySelector(formSelector);
+    form.addEventListener('submit', function (event){
         event.preventDefault();
     });
 
@@ -64,7 +62,7 @@ function enableValidation({formSelector, inputSelector, ...rest}){
             setButtonValidity(rest, form);
         });
     });
-    });
+
 }
 
 enableValidation({
@@ -75,3 +73,4 @@ enableValidation({
     inputErrorClass: 'popup__input_invalid',
     errorClass: 'popup__input_invalid'
   }); 
+
