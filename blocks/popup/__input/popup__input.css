@@ -8,7 +8,7 @@
     line-height: 17px;
     padding-bottom: 8px;
     outline: none;
-    margin-bottom: 30px;
+    margin-bottom: 0;
 }
 
 input:-internal-autofill-selected {
