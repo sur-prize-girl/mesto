@@ -11,7 +11,7 @@ function setInputInvalidState(inputErrorClass, input, errorElement) {
 
 function checkInputValidity({inputErrorClass}, input, form) {
     const errorElement = form.querySelector(`#error-${input.id}`);
-
+    
     if (!input.checkValidity()){
         setInputInvalidState(inputErrorClass, input, errorElement);
     }
@@ -48,11 +48,11 @@ function enableValidation({formSelector, inputSelector, ...rest}){
     const formsArray = Array.from(forms);
 
     formsArray.forEach(function(form){ 
-
         form.addEventListener('submit', function (event){
-        event.preventDefault();
+            event.preventDefault();
+            setButtonValidity(rest, form);
     });
-
+    
     setButtonValidity(rest, form);
     
     const inputs = form.querySelectorAll(inputSelector);
@@ -64,7 +64,8 @@ function enableValidation({formSelector, inputSelector, ...rest}){
             setButtonValidity(rest, form);
         });
     });
-    });
+
+});
 }
 
 enableValidation({
