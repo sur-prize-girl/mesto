@@ -1,22 +1,33 @@
 import {openPopup} from './utils.js';
-import {popupImgData, popupImgCaption} from './init.js';
+import {popupImg} from './init.js';
 
 export default class Card {
-    constructor(data, templateSelector, popupImg) {
+    constructor(data, templateSelector) {
         this._data = data;
-        this._template = templateSelector;
+        this._templateSelector = templateSelector;
         this._link = data.link;
         this._name = data.name;
         this._popupImg = popupImg;
+        this._popupImgData = popupImg.querySelector('.popup__fig-img');
+        this._popupImgCaption = popupImg.querySelector('.popup__fig-caption');
+
     }
 
     _getCard(){
-       return document.querySelector(this._template).content.querySelector('.elements__card').cloneNode(true);
+       return document.querySelector(this._templateSelector).content.querySelector('.elements__card').cloneNode(true);
     }
 
     _handleDelete() {
         this._cardElement.remove();
         this._cardElement = null;
+        this._cardImg.remove();
+        this._cardImg = null;
+        this._cardTitle.remove();        
+        this._cardTitle = null;        
+        this._deleteButton.remove();
+        this._deleteButton = null;
+        this._likeButton.remove();
+        this._likeButton = null;
     }
 
     _handleLike(){
@@ -25,9 +36,9 @@ export default class Card {
 
     _handleImg() {
             openPopup(this._popupImg);
-            popupImgData.src = this._link;
-            popupImgData.alt = this._name;
-            popupImgCaption.textContent = this._name;
+            this._popupImgData.src = this._link;
+            this._popupImgData.alt = this._name;
+            this._popupImgCaption.textContent = this._name;
         }
 
     _setEventListeners(){

@@ -1,7 +1,7 @@
 import initialCards from "./init.js";
 import {popupImg} from "./init.js";
 import Card from "./Card.js";
-import {openPopup, closePopup, closePopupOnOverlay} from "./utils.js";
+import {openPopup, closePopup, initClosePopupsOnOverlay} from "./utils.js";
 import FormValidator from "./FormValidator.js";
 
 //const for Cards-template
@@ -28,12 +28,12 @@ const formEditProfile = popupUserProfile.querySelector('.popup__form');
 const inputNameFormProfile = formEditProfile.querySelector('.popup__input_type_name');
 const inputStatusFormProfile = formEditProfile.querySelector('.popup__input_type_status');
 
-closePopupOnOverlay();
+initClosePopupsOnOverlay();
 
 //Cards-template
 
 initialCards.forEach((item) => {
-    const card = new Card(item, '.elements__card-template', popupImg);
+    const card = new Card(item, '.elements__card-template');
     const cardElement = card.createCard();
     cardsElements.prepend(cardElement);
 });
@@ -62,7 +62,7 @@ const handleCardFormSubmit = (event) => {
         link: sourceInput.value
     };
 
-    const card = new Card(cardPlaceData, '.elements__card-template', popupImg);
+    const card = new Card(cardPlaceData, '.elements__card-template');
     const cardElement = card.createCard();
     cardsElements.prepend(cardElement);
 

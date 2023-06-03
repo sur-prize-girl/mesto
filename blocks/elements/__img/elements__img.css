@@ -5,4 +5,5 @@
     object-fit: cover;
     overflow: hidden;
     display: block;
+    cursor: pointer;
 }
