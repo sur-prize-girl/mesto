@@ -32,9 +32,13 @@ initClosePopupsOnOverlay();
 
 //Cards-template
 
-initialCards.forEach((item) => {
+const createCard = item => {
     const card = new Card(item, '.elements__card-template');
-    const cardElement = card.createCard();
+    return card.createCard();
+}
+
+initialCards.forEach((item) => {
+    const cardElement = createCard(item);
     cardsElements.prepend(cardElement);
 });
 
@@ -62,12 +66,12 @@ const handleCardFormSubmit = (event) => {
         link: sourceInput.value
     };
 
-    const card = new Card(cardPlaceData, '.elements__card-template');
-    const cardElement = card.createCard();
+    const cardElement = createCard(cardPlaceData);
     cardsElements.prepend(cardElement);
 
     closePopup(popupCreateCard);
     formNewCard.reset();
+    validatorNewCard.setButtonValidity();
 };
 
 formNewCard.addEventListener('submit', handleCardFormSubmit);
@@ -81,6 +85,7 @@ function handleProfileFormSubmit (evt) {
     profileStatus.textContent = inputStatusFormProfile.value;
     closePopup(popupUserProfile);
     formEditProfile.reset();
+    validatorProfile.setButtonValidity();
 }
 
 profileEditButton.addEventListener('click', () => {
@@ -95,26 +100,18 @@ popupCloseButton.addEventListener('click', () => {
 
 formEditProfile.addEventListener('submit', handleProfileFormSubmit);
 
-const validatorProfile = new FormValidator(
-    {
-        formSelector: '.popup__form',
-        inputSelector: '.popup__input',
-        submitButtonSelector: '.popup__submit',
-        inactiveButtonClass: 'popup__submit_disabled',
-        inputErrorClass: 'popup__input_invalid',
-        errorClass: 'popup__input_invalid'
-    }, formEditProfile);
-  
+const validationConfig = {
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__submit',
+    inactiveButtonClass: 'popup__submit_disabled',
+    inputErrorClass: 'popup__input_invalid',
+    errorClass: 'popup__input_invalid'
+}
+
+validationConfig.formSelector = 'popup__form';
+const validatorProfile = new FormValidator(validationConfig, formEditProfile);
 validatorProfile.enableValidation();
 
-const validatorNewCard = new FormValidator(
-    {
-        formSelector: 'card-form',
-        inputSelector: '.popup__input',
-        submitButtonSelector: '.popup__submit',
-        inactiveButtonClass: 'popup__submit_disabled',
-        inputErrorClass: 'popup__input_invalid',
-        errorClass: 'popup__input_invalid'
-    }, formNewCard);
-  
-    validatorNewCard.enableValidation();
+validationConfig.formSelector = 'card-form';
+const validatorNewCard = new FormValidator(validationConfig, formNewCard);
+validatorNewCard.enableValidation();

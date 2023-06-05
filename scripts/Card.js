@@ -20,13 +20,9 @@ export default class Card {
     _handleDelete() {
         this._cardElement.remove();
         this._cardElement = null;
-        this._cardImg.remove();
         this._cardImg = null;
-        this._cardTitle.remove();        
         this._cardTitle = null;        
-        this._deleteButton.remove();
         this._deleteButton = null;
-        this._likeButton.remove();
         this._likeButton = null;
     }
 
